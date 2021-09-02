@@ -49,6 +49,7 @@ contract StratManager is Ownable, Pausable {
 
     // verifies that the caller is not a contract.
     modifier onlyEOA() {
+        // solhint-disable-next-line
         require(msg.sender == tx.origin, "!EOA");
         _;
     }

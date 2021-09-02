@@ -5,21 +5,21 @@ pragma solidity ^0.6.12;
 import "./StratManager.sol";
 
 abstract contract FeeManager is StratManager {
-    uint constant public STRATEGIST_FEE = 112;
-    uint constant public MAX_FEE = 1000;
-    uint constant public MAX_CALL_FEE = 111;
+    uint256 public constant STRATEGIST_FEE = 112;
+    uint256 public constant MAX_FEE = 1000;
+    uint256 public constant MAX_CALL_FEE = 111;
 
-    uint constant public WITHDRAWAL_FEE_CAP = 50;
-    uint constant public WITHDRAWAL_MAX = 10000;
+    uint256 public constant WITHDRAWAL_FEE_CAP = 50;
+    uint256 public constant WITHDRAWAL_MAX = 10000;
 
-    uint public withdrawalFee = 10;
+    uint256 public withdrawalFee = 10;
 
-    uint public callFee = 111;
-    uint public beefyFee = MAX_FEE - STRATEGIST_FEE - callFee;
+    uint256 public callFee = 111;
+    uint256 public beefyFee = MAX_FEE - STRATEGIST_FEE - callFee;
 
     function setCallFee(uint256 _fee) public onlyManager {
         require(_fee <= MAX_CALL_FEE, "!cap");
-        
+
         callFee = _fee;
         beefyFee = MAX_FEE - STRATEGIST_FEE - callFee;
     }

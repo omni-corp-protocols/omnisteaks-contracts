@@ -30,7 +30,9 @@ library Address {
 
         uint256 size;
         // solhint-disable-next-line no-inline-assembly
-        assembly { size := extcodesize(account) }
+        assembly {
+            size := extcodesize(account)
+        }
         return size > 0;
     }
 
@@ -48,7 +50,8 @@ library Address {
      * IMPORTANT: because control is transferred to `recipient`, care must be
      * taken to not create reentrancy vulnerabilities. Consider using
      * {ReentrancyGuard} or the
-     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[checks-effects-interactions pattern].
+     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-
+     * interactions-pattern[checks-effects-interactions pattern].
      */
     function sendValue(address payable recipient, uint256 amount) internal {
         require(address(this).balance >= amount, "Address: insufficient balance");
@@ -67,7 +70,8 @@ library Address {
      * function (like regular Solidity function calls).
      *
      * Returns the raw returned data. To convert to the expected return value,
-     * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].
+     * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-
+     * encoding-and-decoding-functions[`abi.decode`].
      *
      * Requirements:
      *
@@ -77,7 +81,7 @@ library Address {
      * _Available since v3.1._
      */
     function functionCall(address target, bytes memory data) internal returns (bytes memory) {
-      return functionCall(target, data, "Address: low-level call failed");
+        return functionCall(target, data, "Address: low-level call failed");
     }
 
     /**
@@ -86,7 +90,11 @@ library Address {
      *
      * _Available since v3.1._
      */
-    function functionCall(address target, bytes memory data, string memory errorMessage) internal returns (bytes memory) {
+    function functionCall(
+        address target,
+        bytes memory data,
+        string memory errorMessage
+    ) internal returns (bytes memory) {
         return functionCallWithValue(target, data, 0, errorMessage);
     }
 
@@ -101,7 +109,11 @@ library Address {
      *
      * _Available since v3.1._
      */
-    function functionCallWithValue(address target, bytes memory data, uint256 value) internal returns (bytes memory) {
+    function functionCallWithValue(
+        address target,
+        bytes memory data,
+        uint256 value
+    ) internal returns (bytes memory) {
         return functionCallWithValue(target, data, value, "Address: low-level call with value failed");
     }
 
@@ -111,7 +123,12 @@ library Address {
      *
      * _Available since v3.1._
      */
-    function functionCallWithValue(address target, bytes memory data, uint256 value, string memory errorMessage) internal returns (bytes memory) {
+    function functionCallWithValue(
+        address target,
+        bytes memory data,
+        uint256 value,
+        string memory errorMessage
+    ) internal returns (bytes memory) {
         require(address(this).balance >= value, "Address: insufficient balance for call");
         require(isContract(target), "Address: call to non-contract");
 
@@ -136,7 +153,11 @@ library Address {
      *
      * _Available since v3.3._
      */
-    function functionStaticCall(address target, bytes memory data, string memory errorMessage) internal view returns (bytes memory) {
+    function functionStaticCall(
+        address target,
+        bytes memory data,
+        string memory errorMessage
+    ) internal view returns (bytes memory) {
         require(isContract(target), "Address: static call to non-contract");
 
         // solhint-disable-next-line avoid-low-level-calls
@@ -160,7 +181,11 @@ library Address {
      *
      * _Available since v3.4._
      */
-    function functionDelegateCall(address target, bytes memory data, string memory errorMessage) internal returns (bytes memory) {
+    function functionDelegateCall(
+        address target,
+        bytes memory data,
+        string memory errorMessage
+    ) internal returns (bytes memory) {
         require(isContract(target), "Address: delegate call to non-contract");
 
         // solhint-disable-next-line avoid-low-level-calls
@@ -168,7 +193,11 @@ library Address {
         return _verifyCallResult(success, returndata, errorMessage);
     }
 
-    function _verifyCallResult(bool success, bytes memory returndata, string memory errorMessage) private pure returns(bytes memory) {
+    function _verifyCallResult(
+        bool success,
+        bytes memory returndata,
+        string memory errorMessage
+    ) private pure returns (bytes memory) {
         if (success) {
             return returndata;
         } else {

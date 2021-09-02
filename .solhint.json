@@ -2,7 +2,7 @@
   "extends": "solhint:recommended",
   "plugins": ["prettier"],
   "rules": {
-    "compiler-version": ["error", "^0.6.12"],
+    "compiler-version": ["error", "^0.6.0"],
     "code-complexity": ["error", 300],
     "const-name-snakecase": "off",
     "constructor-syntax": "error",
@@ -15,6 +15,7 @@
         "endOfLine": "auto"
       }
     ],
-    "reason-string": ["warn", { "maxLength": 64 }]
+    "reason-string": ["warn", { "maxLength": 64 }],
+    "no-empty-blocks": "off"
   }
 }

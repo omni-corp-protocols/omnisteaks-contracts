@@ -51,7 +51,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
         address[] memory _outputToNativeRoute,
         address[] memory _outputToLp0Route,
         address[] memory _outputToLp1Route
-    ) StratManager(_keeper, _strategist, _unirouter, _vault, _beefyFeeRecipient) public {
+    ) public StratManager(_keeper, _strategist, _unirouter, _vault, _beefyFeeRecipient) {
         want = _want;
         pool = _pool;
 
@@ -96,6 +96,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
             wantBal = _amount;
         }
 
+        // solhint-disable-next-line
         if (tx.origin == owner() || paused()) {
             IERC20(want).safeTransfer(vault, wantBal);
         } else {
@@ -104,7 +105,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
         }
     }
 
-   function beforeDeposit() external override {
+    function beforeDeposit() external override {
         if (harvestOnDeposit) {
             require(msg.sender == vault, "!vault");
             _harvest();
@@ -138,6 +139,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
         uint256 nativeBal = IERC20(native).balanceOf(address(this));
 
         uint256 callFeeAmount = nativeBal.mul(callFee).div(MAX_FEE);
+        // solhint-disable-next-line
         IERC20(native).safeTransfer(tx.origin, callFeeAmount);
 
         uint256 beefyFeeAmount = nativeBal.mul(beefyFee).div(MAX_FEE);
@@ -176,7 +178,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
 
     // it calculates how much 'want' the strategy has working in the farm.
     function balanceOfPool() public view returns (uint256) {
-        (uint256 _amount,) = IOmnifarmFarm(pool).userInfo(address(this));
+        (uint256 _amount, ) = IOmnifarmFarm(pool).userInfo(address(this));
         return _amount;
     }
 

@@ -13,6 +13,7 @@
     "artifacts/**/*",
     "artifacts/**/*.json",
     "scripts/**/*",
+    "utils/**/*",
     "tasks/**/*",
     "test/**/*",
     "typechain/**/*",

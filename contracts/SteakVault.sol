@@ -21,7 +21,7 @@ contract SteakVault is ERC20, Ownable, ReentrancyGuard {
 
     struct StratCandidate {
         address implementation;
-        uint proposedTime;
+        uint256 proposedTime;
     }
 
     // The last proposed strategy to switch to.
@@ -44,15 +44,12 @@ contract SteakVault is ERC20, Ownable, ReentrancyGuard {
      * @param _symbol the symbol of the vault token.
      * @param _approvalDelay the delay before a new strat can be approved.
      */
-    constructor (
+    constructor(
         IStrategy _strategy,
         string memory _name,
         string memory _symbol,
         uint256 _approvalDelay
-    ) public ERC20(
-        _name,
-        _symbol
-    ) {
+    ) public ERC20(_name, _symbol) {
         strategy = _strategy;
         approvalDelay = _approvalDelay;
     }
@@ -66,7 +63,7 @@ contract SteakVault is ERC20, Ownable, ReentrancyGuard {
      * It takes into account the vault contract balance, the strategy contract balance
      *  and the balance deployed in other contracts as part of the strategy.
      */
-    function balance() public view returns (uint) {
+    function balance() public view returns (uint256) {
         return want().balanceOf(address(this)).add(IStrategy(strategy).balanceOf());
     }
 
@@ -99,7 +96,7 @@ contract SteakVault is ERC20, Ownable, ReentrancyGuard {
      * @dev The entrypoint of funds into the system. People deposit with this function
      * into the vault. The vault is then in charge of sending funds into the strategy.
      */
-    function deposit(uint _amount) public nonReentrant {
+    function deposit(uint256 _amount) public nonReentrant {
         strategy.beforeDeposit();
 
         uint256 _pool = balance();
@@ -121,7 +118,7 @@ contract SteakVault is ERC20, Ownable, ReentrancyGuard {
      * by the vault's deposit() function.
      */
     function earn() public {
-        uint _bal = available();
+        uint256 _bal = available();
         want().safeTransfer(address(strategy), _bal);
         strategy.deposit();
     }
@@ -142,12 +139,12 @@ contract SteakVault is ERC20, Ownable, ReentrancyGuard {
         uint256 r = (balance().mul(_shares)).div(totalSupply());
         _burn(msg.sender, _shares);
 
-        uint b = want().balanceOf(address(this));
+        uint256 b = want().balanceOf(address(this));
         if (b < r) {
-            uint _withdraw = r.sub(b);
+            uint256 _withdraw = r.sub(b);
             strategy.withdraw(_withdraw);
-            uint _after = want().balanceOf(address(this));
-            uint _diff = _after.sub(b);
+            uint256 _after = want().balanceOf(address(this));
+            uint256 _diff = _after.sub(b);
             if (_diff < _withdraw) {
                 r = b.add(_diff);
             }
@@ -156,24 +153,21 @@ contract SteakVault is ERC20, Ownable, ReentrancyGuard {
         want().safeTransfer(msg.sender, r);
     }
 
-    /** 
+    /**
      * @dev Sets the candidate for the new strat to use with this vault.
-     * @param _implementation The address of the candidate strategy.  
+     * @param _implementation The address of the candidate strategy.
      */
     function proposeStrat(address _implementation) public onlyOwner {
         require(address(this) == IStrategy(_implementation).vault(), "Proposal not valid for this Vault");
-        stratCandidate = StratCandidate({
-            implementation: _implementation,
-            proposedTime: block.timestamp
-         });
+        stratCandidate = StratCandidate({ implementation: _implementation, proposedTime: block.timestamp });
 
         emit NewStratCandidate(_implementation);
     }
 
-    /** 
-     * @dev It switches the active strat for the strat candidate. After upgrading, the 
-     * candidate implementation is set to the 0x00 address, and proposedTime to a time 
-     * happening in +100 years for safety. 
+    /**
+     * @dev It switches the active strat for the strat candidate. After upgrading, the
+     * candidate implementation is set to the 0x00 address, and proposedTime to a time
+     * happening in +100 years for safety.
      */
 
     function upgradeStrat() public onlyOwner {
