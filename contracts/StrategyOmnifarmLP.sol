@@ -48,10 +48,11 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
         address _keeper,
         address _strategist,
         address _beefyFeeRecipient,
+        address _gasPrice,
         address[] memory _outputToNativeRoute,
         address[] memory _outputToLp0Route,
         address[] memory _outputToLp1Route
-    ) public StratManager(_keeper, _strategist, _unirouter, _vault, _beefyFeeRecipient) {
+    ) public StratManager(_keeper, _strategist, _unirouter, _vault, _beefyFeeRecipient) GasThrottler(_gasPrice) {
         want = _want;
         pool = _pool;
 
