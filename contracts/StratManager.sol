@@ -7,7 +7,7 @@ import "./Pausable.sol";
 
 contract StratManager is Ownable, Pausable {
     /**
-     * @dev Beefy Contracts:
+     * @dev Contracts:
      * {keeper} - Address to manage a few lower risk features of the strat
      * {strategist} - Address of the strategy author/deployer where strategist fee will go.
      * {vault} - Address of the vault that controls the strategy's funds.
@@ -25,7 +25,7 @@ contract StratManager is Ownable, Pausable {
      * @param _strategist address where strategist fees go.
      * @param _unirouter router to use for swaps
      * @param _vault address of parent vault.
-     * @param _beefyFeeRecipient address where to send Beefy's fees.
+     * @param _beefyFeeRecipient address where to send fees.
      */
     constructor(
         address _keeper,
