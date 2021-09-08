@@ -5,28 +5,47 @@ pragma solidity ^0.6.12;
 import "./StratManager.sol";
 
 abstract contract FeeManager is StratManager {
-    uint256 public constant STRATEGIST_FEE = 112;
-    uint256 public constant MAX_FEE = 1000;
-    uint256 public constant MAX_CALL_FEE = 111;
+    // Fee Caps
+    uint256 public constant WITHDRAWAL_FEE_CAP = 100; // 1%
+    uint256 public constant HARVEST_FEE_CAP = 2000; // 20%
 
-    uint256 public constant WITHDRAWAL_FEE_CAP = 50;
-    uint256 public constant WITHDRAWAL_MAX = 10000;
+    // Denominator for fee calcs
+    uint256 public constant MAX_FEE = 10000;
 
-    uint256 public withdrawalFee = 10;
+    uint256 public withdrawalFee;
+    uint256 public totalHarvestFee;
 
-    uint256 public callFee = 111;
-    uint256 public beefyFee = MAX_FEE - STRATEGIST_FEE - callFee;
+    // components of harvest fee = strategistFee + callFee + platformFee
+    uint256 public strategistFee;
+    uint256 public callFee;
 
-    function setCallFee(uint256 _fee) public onlyManager {
-        require(_fee <= MAX_CALL_FEE, "!cap");
+    constructor() internal {
+        setWithdrawalFee(10); // 0.1%
+        setTotalHarvestFee(1000); // 10%
+        setCallFee(2000); // 20% of harvest fee
+    }
 
-        callFee = _fee;
-        beefyFee = MAX_FEE - STRATEGIST_FEE - callFee;
+    function platformFee() public view returns (uint256) {
+        return MAX_FEE - strategistFee - callFee;
     }
 
     function setWithdrawalFee(uint256 _fee) public onlyManager {
         require(_fee <= WITHDRAWAL_FEE_CAP, "!cap");
-
         withdrawalFee = _fee;
+    }
+
+    function setTotalHarvestFee(uint256 _fee) public onlyManager {
+        require(_fee <= HARVEST_FEE_CAP, "!cap");
+        totalHarvestFee = _fee;
+    }
+
+    function setCallFee(uint256 _fee) public onlyManager {
+        callFee = _fee;
+        require(callFee + strategistFee <= MAX_FEE, "!cap");
+    }
+
+    function setStrategistFee(uint256 _fee) public onlyManager {
+        strategistFee = _fee;
+        require(callFee + strategistFee <= MAX_FEE, "!cap");
     }
 }

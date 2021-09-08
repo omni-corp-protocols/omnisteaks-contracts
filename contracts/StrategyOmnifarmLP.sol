@@ -101,7 +101,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
         if (tx.origin == owner() || paused()) {
             IERC20(want).safeTransfer(vault, wantBal);
         } else {
-            uint256 withdrawalFeeAmount = wantBal.mul(withdrawalFee).div(WITHDRAWAL_MAX);
+            uint256 withdrawalFeeAmount = wantBal.mul(withdrawalFee).div(MAX_FEE);
             IERC20(want).safeTransfer(vault, wantBal.sub(withdrawalFeeAmount));
         }
     }
@@ -134,7 +134,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
 
     // performance fees
     function chargeFees() internal {
-        uint256 toNative = IERC20(output).balanceOf(address(this)).mul(45).div(1000);
+        uint256 toNative = IERC20(output).balanceOf(address(this)).mul(totalHarvestFee).div(MAX_FEE);
         IUniswapRouterETH(unirouter).swapExactTokensForTokens(toNative, 0, outputToNativeRoute, address(this), now);
 
         uint256 nativeBal = IERC20(native).balanceOf(address(this));
@@ -143,11 +143,11 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
         // solhint-disable-next-line
         IERC20(native).safeTransfer(tx.origin, callFeeAmount);
 
-        uint256 beefyFeeAmount = nativeBal.mul(beefyFee).div(MAX_FEE);
-        IERC20(native).safeTransfer(beefyFeeRecipient, beefyFeeAmount);
+        uint256 platformFeeAmount = nativeBal.mul(platformFee()).div(MAX_FEE);
+        IERC20(native).safeTransfer(beefyFeeRecipient, platformFeeAmount);
 
-        uint256 strategistFee = nativeBal.mul(STRATEGIST_FEE).div(MAX_FEE);
-        IERC20(native).safeTransfer(strategist, strategistFee);
+        uint256 strategistFeeAmount = nativeBal.mul(strategistFee).div(MAX_FEE);
+        IERC20(native).safeTransfer(strategist, strategistFeeAmount);
     }
 
     // Adds liquidity to AMM and gets more LP tokens.
