@@ -20,7 +20,6 @@ abstract contract FeeManager is StratManager {
     uint256 public callFee;
 
     constructor() internal {
-        setWithdrawalFee(10); // 0.1%
         setTotalHarvestFee(1000); // 10%
         setCallFee(2000); // 20% of harvest fee
     }

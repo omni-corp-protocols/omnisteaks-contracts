@@ -9,8 +9,8 @@ const outputFilePath = `./deployments/${hre.network.name}.json`;
 // Constructor params
 const PARAMS = {
   approvalDelay: config.approvalDelay,
-  name: "Steak Cake",
-  symbol: "steakCake",
+  name: "Puff Cake",
+  symbol: "puffCake",
   unirouter: config.unirouter,
 };
 
