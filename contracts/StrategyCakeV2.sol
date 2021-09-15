@@ -50,8 +50,8 @@ contract StrategyCakeV2 is StratManager, FeeManager {
         address _unirouter,
         address _keeper,
         address _strategist,
-        address _beefyFeeRecipient
-    ) public StratManager(_keeper, _strategist, _unirouter, _vault, _beefyFeeRecipient) {
+        address _platformFeeRecipient
+    ) public StratManager(_keeper, _strategist, _unirouter, _vault, _platformFeeRecipient) {
         _giveAllowances();
     }
 
@@ -116,7 +116,7 @@ contract StrategyCakeV2 is StratManager, FeeManager {
         IERC20(wrapped).safeTransfer(tx.origin, callFeeAmount);
 
         uint256 platformFeeAmount = wrappedBal.mul(platformFee()).div(MAX_FEE);
-        IERC20(wrapped).safeTransfer(beefyFeeRecipient, platformFeeAmount);
+        IERC20(wrapped).safeTransfer(platformFeeRecipient, platformFeeAmount);
 
         uint256 strategistFeeAmount = wrappedBal.mul(strategistFee).div(MAX_FEE);
         IERC20(wrapped).safeTransfer(strategist, strategistFeeAmount);

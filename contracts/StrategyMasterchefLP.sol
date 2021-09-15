@@ -11,9 +11,23 @@ import "./StratManager.sol";
 import "./FeeManager.sol";
 import "./GasThrottler.sol";
 
-import "./IOmnifarmFarm.sol";
+interface IMasterChef {
+    function deposit(uint256 _pid, uint256 _amount) external;
 
-contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
+    function withdraw(uint256 _pid, uint256 _amount) external;
+
+    function enterStaking(uint256 _amount) external;
+
+    function leaveStaking(uint256 _amount) external;
+
+    function pendingCake(uint256 _pid, address _user) external view returns (uint256);
+
+    function userInfo(uint256 _pid, address _user) external view returns (uint256, uint256);
+
+    function emergencyWithdraw(uint256 _pid) external;
+}
+
+contract StrategyMasterchefLP is StratManager, FeeManager, GasThrottler {
     using SafeERC20 for IERC20;
     using SafeMath for uint256;
 
@@ -29,6 +43,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
 
     bool public harvestOnDeposit;
     uint256 public lastHarvest;
+    uint256 public poolId;
 
     // Routes
     address[] public outputToNativeRoute;
@@ -41,6 +56,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
     event StratHarvest(address indexed harvester);
 
     constructor(
+        uint256 _poolId,
         address _want,
         address _pool,
         address _vault,
@@ -53,6 +69,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
         address[] memory _outputToLp0Route,
         address[] memory _outputToLp1Route
     ) public StratManager(_keeper, _strategist, _unirouter, _vault, _platformFeeRecipient) GasThrottler(_gasPrice) {
+        poolId = _poolId;
         want = _want;
         pool = _pool;
 
@@ -79,7 +96,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
         uint256 wantBal = IERC20(want).balanceOf(address(this));
 
         if (wantBal > 0) {
-            IOmnifarmFarm(pool).deposit(wantBal);
+            IMasterChef(pool).deposit(poolId, wantBal);
         }
     }
 
@@ -89,7 +106,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
         uint256 wantBal = IERC20(want).balanceOf(address(this));
 
         if (wantBal < _amount) {
-            IOmnifarmFarm(pool).withdraw(_amount.sub(wantBal));
+            IMasterChef(pool).withdraw(poolId, _amount.sub(wantBal));
             wantBal = IERC20(want).balanceOf(address(this));
         }
 
@@ -123,7 +140,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
 
     // compounds earnings and charges performance fee
     function _harvest() internal {
-        IOmnifarmFarm(pool).deposit(0);
+        IMasterChef(pool).deposit(poolId, 0);
         chargeFees();
         addLiquidity();
         deposit();
@@ -179,7 +196,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
 
     // it calculates how much 'want' the strategy has working in the farm.
     function balanceOfPool() public view returns (uint256) {
-        (uint256 _amount, ) = IOmnifarmFarm(pool).userInfo(address(this));
+        (uint256 _amount, ) = IMasterChef(pool).userInfo(poolId, address(this));
         return _amount;
     }
 
@@ -188,8 +205,6 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
 
         if (harvestOnDeposit == true) {
             super.setWithdrawalFee(0);
-        } else {
-            super.setWithdrawalFee(10);
         }
     }
 
@@ -197,7 +212,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
     function retireStrat() external {
         require(msg.sender == vault, "!vault");
 
-        IOmnifarmFarm(pool).emergencyWithdraw();
+        IMasterChef(pool).emergencyWithdraw(poolId);
 
         uint256 wantBal = IERC20(want).balanceOf(address(this));
         IERC20(want).transfer(vault, wantBal);
@@ -206,7 +221,7 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
     // pauses deposits and withdraws all funds from third party systems.
     function panic() public onlyManager {
         pause();
-        IOmnifarmFarm(pool).emergencyWithdraw();
+        IMasterChef(pool).emergencyWithdraw(poolId);
     }
 
     function pause() public onlyManager {

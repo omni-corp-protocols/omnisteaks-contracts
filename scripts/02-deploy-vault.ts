@@ -2,7 +2,7 @@ import hre from "hardhat";
 import { ethers } from "hardhat";
 import { readFileSync, writeFileSync } from "fs";
 
-import { SteakVault, StrategyOmnifarmLP } from "../typechain";
+import { Vault, StrategyOmnifarmLP } from "../typechain";
 import { config } from "./configs/bsc";
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
@@ -18,17 +18,17 @@ async function main() {
   const gasPriceAddr = deployments["GasPrice"];
 
   // Vault
-  const SteakVault = await hre.ethers.getContractFactory("SteakVault");
-  const steakVault: SteakVault = await SteakVault.deploy(stratAddr, config.name, config.symbol, config.approvalDelay);
-  console.log(`Vault Deployed: ${steakVault.address}`);
-  await steakVault.deployed();
+  const Vault = await hre.ethers.getContractFactory("Vault");
+  const vault: Vault = await Vault.deploy(stratAddr, config.name, config.symbol, config.approvalDelay);
+  console.log(`Vault Deployed: ${vault.address}`);
+  await vault.deployed();
 
   // Strategy
   const StrategyOmnifarmLP = await hre.ethers.getContractFactory("StrategyOmnifarmLP");
   const strategy: StrategyOmnifarmLP = await StrategyOmnifarmLP.deploy(
     config.wantToken,
     config.pool,
-    steakVault.address,
+    vault.address,
     config.unirouter,
     deployer.address,
     deployer.address,
@@ -44,13 +44,13 @@ async function main() {
   if (!deployments["Vaults"]) deployments["Vaults"] = [];
   deployments["Vaults"].push({
     [config.name]: {
-      vault: steakVault.address,
+      vault: vault.address,
       strategy: strategy.address,
     },
   });
 
   // Save constructor arguments
-  deployments["Constructors"][steakVault.address] = SteakVault.interface.encodeDeploy([
+  deployments["Constructors"][vault.address] = Vault.interface.encodeDeploy([
     stratAddr,
     config.name,
     config.symbol,
@@ -59,7 +59,7 @@ async function main() {
   deployments["Constructors"][strategy.address] = StrategyOmnifarmLP.interface.encodeDeploy([
     config.wantToken,
     config.pool,
-    steakVault.address,
+    vault.address,
     config.unirouter,
     deployer.address,
     deployer.address,
