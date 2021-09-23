@@ -26,16 +26,16 @@ interface IMasterChef {
     function emergencyWithdraw(uint256 _pid) external;
 }
 
-contract StrategyCakeV2 is StratManager, FeeManager {
+contract StrategyJetswapWings is StratManager, FeeManager {
     using SafeERC20 for IERC20;
     using SafeMath for uint256;
 
     // Tokens used
     address public constant wrapped = address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c);
-    address public constant want = address(0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82);
+    address public constant want = address(0x0487b824c8261462F88940f97053E65bDb498446);
 
     // Third party contracts
-    address public constant masterchef = address(0x73feaa1eE314F8c655E354234017bE2193C9E24E);
+    address public constant masterchef = address(0x63d6EC1cDef04464287e2af710FFef9780B6f9F5);
 
     // Routes
     address[] public wantToWrappedRoute = [want, wrapped];
