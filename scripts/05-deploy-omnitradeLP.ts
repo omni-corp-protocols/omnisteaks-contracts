@@ -2,17 +2,9 @@ import hre from "hardhat";
 import { ethers } from "hardhat";
 import { readFileSync, writeFileSync } from "fs";
 
-import { Vault, StrategyJetswapWings } from "../typechain";
+import { Vault, StrategyOmnifarmOmnitradeLP } from "../typechain";
 import { config } from "./configs/bsc";
 const outputFilePath = `./deployments/${hre.network.name}.json`;
-
-// Constructor params
-const PARAMS = {
-  approvalDelay: config.approvalDelay,
-  name: "Puff Jetswap WINGS",
-  symbol: "puffJetswapWINGS",
-  unirouter: config.unirouter,
-};
 
 async function main() {
   const deployments = JSON.parse(readFileSync(outputFilePath, "utf-8"));
@@ -23,27 +15,36 @@ async function main() {
   const deployerTxCount = await deployer.getTransactionCount("latest");
   const stratAddr = ethers.utils.getContractAddress({ from: deployer.address, nonce: deployerTxCount + 1 });
 
+  const gasPriceAddr = deployments["GasPrice"];
+
   // Vault
   const Vault = await hre.ethers.getContractFactory("Vault");
-  const vault: Vault = await Vault.deploy(stratAddr, PARAMS.name, PARAMS.symbol, PARAMS.approvalDelay);
+  const vault: Vault = await Vault.deploy(stratAddr, config.name, config.symbol, config.approvalDelay);
   console.log(`Vault Deployed: ${vault.address}`);
   await vault.deployed();
 
   // Strategy
-  const StrategyJetswapWings = await hre.ethers.getContractFactory("StrategyJetswapWings");
-  const strategy: StrategyJetswapWings = await StrategyJetswapWings.deploy(
+  const StrategyOmnifarmOmnitradeLP = await hre.ethers.getContractFactory("StrategyOmnifarmOmnitradeLP");
+  const strategy: StrategyOmnifarmOmnitradeLP = await StrategyOmnifarmOmnitradeLP.deploy(
+    config.wantToken,
+    config.pool,
     vault.address,
-    PARAMS.unirouter,
+    config.unirouter,
     deployer.address,
     deployer.address,
     deployer.address,
+    gasPriceAddr,
+    config.outputToNativeRoute,
+    config.outputToLp0Route,
+    config.outputToLp1Route,
+    { gasLimit: 6000000 },
   );
   console.log(`Strategy Deployed: ${strategy.address}`);
   await strategy.deployed();
 
   if (!deployments["Vaults"]) deployments["Vaults"] = [];
   deployments["Vaults"].push({
-    [PARAMS.name]: {
+    [config.name]: {
       vault: vault.address,
       strategy: strategy.address,
     },
@@ -52,16 +53,22 @@ async function main() {
   // Save constructor arguments
   deployments["Constructors"][vault.address] = Vault.interface.encodeDeploy([
     stratAddr,
-    PARAMS.name,
-    PARAMS.symbol,
-    PARAMS.approvalDelay,
+    config.name,
+    config.symbol,
+    config.approvalDelay,
   ]);
-  deployments["Constructors"][strategy.address] = StrategyJetswapWings.interface.encodeDeploy([
+  deployments["Constructors"][strategy.address] = StrategyOmnifarmOmnitradeLP.interface.encodeDeploy([
+    config.wantToken,
+    config.pool,
     vault.address,
-    PARAMS.unirouter,
+    config.unirouter,
     deployer.address,
     deployer.address,
     deployer.address,
+    gasPriceAddr,
+    config.outputToNativeRoute,
+    config.outputToLp0Route,
+    config.outputToLp1Route,
   ]);
   writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
 }

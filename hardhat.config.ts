@@ -8,7 +8,7 @@ dotenv.config({ path: __dirname + "/.env" });
 const config: HardhatUserConfig = {
   networks: {
     bsc: {
-      url: process.env.bscRpc || "https://bsc-dataseed.binance.org/",
+      url: process.env.bscRpc || "https://bsc-dataseed.binance.org/", //"https://data-seed-prebsc-1-s1.binance.org:8545/"
       accounts: [process.env["PRIVATE_KEY"]],
     },
   },
