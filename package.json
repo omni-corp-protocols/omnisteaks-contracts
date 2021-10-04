@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "hh": "hardhat run",
+    "build": "hardhat clean && hardhat compile",
     "compile": "hardhat compile",
     "clean": "hardhat clean",
     "test": "hardhat test",
