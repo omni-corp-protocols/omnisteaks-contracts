@@ -1,5 +1,6 @@
 import "@typechain/hardhat";
 import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-etherscan";
 import { HardhatUserConfig } from "hardhat/config";
 
 import * as dotenv from "dotenv";
@@ -24,6 +25,9 @@ const config: HardhatUserConfig = {
         runs: 999999,
       },
     },
+  },
+  etherscan: {
+    apiKey: process.env["API_KEY"],
   },
 };
 
