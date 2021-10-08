@@ -8,7 +8,11 @@ dotenv.config({ path: __dirname + "/.env" });
 const config: HardhatUserConfig = {
   networks: {
     bsc: {
-      url: process.env.bscRpc || "https://bsc-dataseed.binance.org/", //"https://data-seed-prebsc-1-s1.binance.org:8545/"
+      url: process.env.bscRpc || "https://bsc-dataseed.binance.org/",
+      accounts: [process.env["PRIVATE_KEY"]],
+    },
+    arbitrum: {
+      url: process.env.arbitrumRpc || "https://arb1.arbitrum.io/rpc",
       accounts: [process.env["PRIVATE_KEY"]],
     },
   },
