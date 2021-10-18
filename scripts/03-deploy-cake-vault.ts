@@ -2,15 +2,15 @@ import hre from "hardhat";
 import { ethers } from "hardhat";
 import { readFileSync, writeFileSync } from "fs";
 
-import { Vault, StrategyJetswapWings } from "../typechain";
+import { Vault, StrategyLinearLina } from "../typechain";
 import { config } from "./configs/bsc";
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
 // Constructor params
 const PARAMS = {
   approvalDelay: config.approvalDelay,
-  name: "Puff Jetswap WINGS",
-  symbol: "puffJetswapWINGS",
+  name: "Puff Linear LINA",
+  symbol: "puffLinearLINA",
   unirouter: config.unirouter,
 };
 
@@ -30,8 +30,8 @@ async function main() {
   await vault.deployed();
 
   // Strategy
-  const StrategyJetswapWings = await hre.ethers.getContractFactory("StrategyJetswapWings");
-  const strategy: StrategyJetswapWings = await StrategyJetswapWings.deploy(
+  const StrategyLinearLina = await hre.ethers.getContractFactory("StrategyLinearLina");
+  const strategy: StrategyLinearLina = await StrategyLinearLina.deploy(
     vault.address,
     PARAMS.unirouter,
     deployer.address,
@@ -56,7 +56,7 @@ async function main() {
     PARAMS.symbol,
     PARAMS.approvalDelay,
   ]);
-  deployments["Constructors"][strategy.address] = StrategyJetswapWings.interface.encodeDeploy([
+  deployments["Constructors"][strategy.address] = StrategyLinearLina.interface.encodeDeploy([
     vault.address,
     PARAMS.unirouter,
     deployer.address,
