@@ -19,10 +19,7 @@ contract StrategyLinearLina is StratManager, FeeManager, GasThrottler {
 
     // Tokens used
     address public native;
-    address public output;
     address public want;
-    // address public lpToken0;
-    // address public lpToken1;
 
     // Third party contracts
     address public pool;
@@ -32,8 +29,6 @@ contract StrategyLinearLina is StratManager, FeeManager, GasThrottler {
 
     // Routes
     address[] public outputToNativeRoute;
-    // address[] public outputToLp0Route;
-    // address[] public outputToLp1Route;
 
     /**
      * @dev Event that is fired each time someone harvests the strat.
@@ -50,26 +45,12 @@ contract StrategyLinearLina is StratManager, FeeManager, GasThrottler {
         address _platformFeeRecipient,
         address _gasPrice,
         address[] memory _outputToNativeRoute
-        // address[] memory _outputToLp0Route,
-        // address[] memory _outputToLp1Route
     ) public StratManager(_keeper, _strategist, _unirouter, _vault, _platformFeeRecipient) GasThrottler(_gasPrice) {
         want = _want;
         pool = _pool;
 
-        // output = _want;
         native = _outputToNativeRoute[_outputToNativeRoute.length - 1];
-        // outputToNativeRoute = _outputToNativeRoute;
-
-        // setup lp routing
-        // lpToken0 = IUniswapV2Pair(want).token0();
-        // require(_outputToLp0Route[0] == output, "outputToLp0Route[0] != output");
-        // require(_outputToLp0Route[_outputToLp0Route.length - 1] == lpToken0, "outputToLp0Route[last] != lpToken0");
-        // outputToLp0Route = _outputToLp0Route;
-
-        // lpToken1 = IUniswapV2Pair(want).token1();
-        // require(_outputToLp1Route[0] == output, "outputToLp1Route[0] != output");
-        // require(_outputToLp1Route[_outputToLp1Route.length - 1] == lpToken1, "outputToLp1Route[last] != lpToken1");
-        // outputToLp1Route = _outputToLp1Route;
+        outputToNativeRoute = _outputToNativeRoute;
 
         _giveAllowances();
     }
@@ -124,17 +105,18 @@ contract StrategyLinearLina is StratManager, FeeManager, GasThrottler {
     // compounds earnings and charges performance fee
     function _harvest() internal {
         IOmnifarmFarm(pool).deposit(0);
-        chargeFees();
-        // addLiquidity();
-        deposit();
-
-        lastHarvest = block.timestamp;
-        emit StratHarvest(msg.sender);
+        uint256 wantBal = IERC20(want).balanceOf(address(this));
+        if (wantBal > 0) {
+            chargeFees();
+            deposit();
+            lastHarvest = block.timestamp;
+            emit StratHarvest(msg.sender);
+        }
     }
 
     // performance fees
     function chargeFees() internal {
-        uint256 toNative = IERC20(output).balanceOf(address(this)).mul(totalHarvestFee).div(MAX_FEE);
+        uint256 toNative = IERC20(want).balanceOf(address(this)).mul(totalHarvestFee).div(MAX_FEE);
         IUniswapRouterETH(unirouter).swapExactTokensForTokens(toNative, 0, outputToNativeRoute, address(this), now);
 
         uint256 nativeBal = IERC20(native).balanceOf(address(this));
@@ -149,23 +131,6 @@ contract StrategyLinearLina is StratManager, FeeManager, GasThrottler {
         uint256 strategistFeeAmount = nativeBal.mul(strategistFee).div(MAX_FEE);
         IERC20(native).safeTransfer(strategist, strategistFeeAmount);
     }
-
-    // Adds liquidity to AMM and gets more LP tokens.
-    // function addLiquidity() internal {
-    //     uint256 outputHalf = IERC20(output).balanceOf(address(this)).div(2);
-
-    //     if (lpToken0 != output) {
-    //         IUniswapRouterETH(unirouter).swapExactTokensForTokens(outputHalf, 0, outputToLp0Route, address(this), now);
-    //     }
-
-    //     if (lpToken1 != output) {
-    //         IUniswapRouterETH(unirouter).swapExactTokensForTokens(outputHalf, 0, outputToLp1Route, address(this), now);
-    //     }
-
-    //     uint256 lp0Bal = IERC20(lpToken0).balanceOf(address(this));
-    //     uint256 lp1Bal = IERC20(lpToken1).balanceOf(address(this));
-    //     IUniswapRouterETH(unirouter).addLiquidity(lpToken0, lpToken1, lp0Bal, lp1Bal, 1, 1, address(this), now);
-    // }
 
     // calculate the total underlaying 'want' held by the strat.
     function balanceOf() public view returns (uint256) {
@@ -225,31 +190,15 @@ contract StrategyLinearLina is StratManager, FeeManager, GasThrottler {
 
     function _giveAllowances() internal {
         IERC20(want).safeApprove(pool, uint256(-1));
-        IERC20(output).safeApprove(unirouter, uint256(-1));
-
-        // IERC20(lpToken0).safeApprove(unirouter, 0);
-        // IERC20(lpToken0).safeApprove(unirouter, uint256(-1));
-
-        // IERC20(lpToken1).safeApprove(unirouter, 0);
-        // IERC20(lpToken1).safeApprove(unirouter, uint256(-1));
+        IERC20(want).safeApprove(unirouter, uint256(-1));
     }
 
     function _removeAllowances() internal {
         IERC20(want).safeApprove(pool, 0);
-        IERC20(output).safeApprove(unirouter, 0);
-        // IERC20(lpToken0).safeApprove(unirouter, 0);
-        // IERC20(lpToken1).safeApprove(unirouter, 0);
+        IERC20(want).safeApprove(unirouter, 0);
     }
 
     function outputToNative() external view returns (address[] memory) {
         return outputToNativeRoute;
     }
-
-    // function outputToLp0() external view returns (address[] memory) {
-    //     return outputToLp0Route;
-    // }
-
-    // function outputToLp1() external view returns (address[] memory) {
-    //     return outputToLp1Route;
-    // }
 }

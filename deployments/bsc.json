@@ -94,9 +94,9 @@
       }
     },
     {
-      "Puff Linear LINA": {
-        "vault": "0x3D640ee19347c2228c4069bc1561C7b2E1Fc8EB7",
-        "strategy": "0xd1A14e0D2143c57e56d35BE5E729F4352545525f"
+      "Puff LINA": {
+        "vault": "0x5a2b19836324e3495a3977aE7b9B1ff0D968d96b",
+        "strategy": "0x616572886d2b671Ef340eB7fD89A9B797D1A16Fc"
       }
     }
   ]

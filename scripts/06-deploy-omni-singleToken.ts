@@ -2,7 +2,7 @@ import hre from "hardhat";
 import { ethers } from "hardhat";
 import { readFileSync, writeFileSync } from "fs";
 
-import { Vault, StrategyCakeV2 } from "../typechain";
+import { Vault, StrategyLinearLina } from "../typechain";
 import { config } from "./configs/bsc";
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
@@ -30,13 +30,17 @@ async function main() {
   await vault.deployed();
 
   // Strategy
-  const StrategyCakeV2 = await hre.ethers.getContractFactory("StrategyCakeV2");
-  const strategy: StrategyCakeV2 = await StrategyCakeV2.deploy(
+  const StrategyLinearLina = await hre.ethers.getContractFactory("StrategyLinearLina");
+  const strategy: StrategyLinearLina = await StrategyLinearLina.deploy(
+    config.wantToken,
+    config.pool,
     vault.address,
-    PARAMS.unirouter,
+    config.unirouter,
     deployer.address,
     deployer.address,
     deployer.address,
+    gasPriceAddr,
+    config.outputToNativeRoute,
   );
   console.log(`Strategy Deployed: ${strategy.address}`);
   await strategy.deployed();
@@ -56,7 +60,7 @@ async function main() {
     PARAMS.symbol,
     PARAMS.approvalDelay,
   ]);
-  deployments["Constructors"][strategy.address] = StrategyCakeV2.interface.encodeDeploy([
+  deployments["Constructors"][strategy.address] = StrategyLinearLina.interface.encodeDeploy([
     vault.address,
     PARAMS.unirouter,
     deployer.address,
