@@ -114,20 +114,6 @@ contract StrategyAutoBelt is StratManager, FeeManager, GasThrottler {
         }
     }
 
-    // compounds earnings and charges performance fee remove after rev this is not working currently
-    // function harvest() external whenNotPaused onlyEOA gasThrottle {
-    //     IAutoFarmV2(autofarm).deposit(poolId, 0);
-    //     uint256 wantBal = IERC20(want).balanceOf(address(this));
-
-    //     if (wantBal > 0) {
-    //         chargeFees();
-    //         addLiquidity();
-    //         deposit();
-            
-    //         emit StratHarvest(msg.sender);
-    //     }
-    // }
-
     // compounds earnings and charges performance fee
     function harvest() external whenNotPaused onlyEOA gasThrottle {
         IAutoFarmV2(autofarm).deposit(poolId, 0);

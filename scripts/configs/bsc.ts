@@ -1,8 +1,8 @@
 export const config = {
   approvalDelay: "14400", // in seconds
   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
-  name: "Puff Belt BNB",
-  symbol: "puffBeltBNB",
+  name: "Puff Belt BNB test",
+  symbol: "puffBeltBNBTest",
 
   wantToken:"0xa8bb71facdd46445644c277f9499dd22f6f0a30c",
   poolId: 338,

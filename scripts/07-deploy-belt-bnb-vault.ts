@@ -60,11 +60,14 @@ async function main() {
     PARAMS.approvalDelay,
   ]);
   deployments["Constructors"][strategy.address] = StrategyAutoBelt.interface.encodeDeploy([
+    config.wantToken,
+    config.poolId,
     vault.address,
-    PARAMS.unirouter,
+    config.unirouter,
     deployer.address,
     deployer.address,
     deployer.address,
+    gasPriceAddr,
   ]);
   writeFileSync(outputFilePath, JSON.stringify(deployments, null, 2));
 }
