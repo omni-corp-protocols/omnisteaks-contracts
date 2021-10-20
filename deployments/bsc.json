@@ -98,6 +98,12 @@
         "vault": "0x5a2b19836324e3495a3977aE7b9B1ff0D968d96b",
         "strategy": "0x616572886d2b671Ef340eB7fD89A9B797D1A16Fc"
       }
+    },
+    {
+      "Puff Belt BNB test": {
+        "vault": "0xDF2B36ad1774E0D5A37b66CBD661Ab368aA0BAc3",
+        "strategy": "0x10E45790B95805A8E2B2541002622D15D0d9c15a"
+      }
     }
   ]
 }
