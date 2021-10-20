@@ -2,7 +2,7 @@ import { ethers } from "hardhat";
 import { config } from "./configs/bsc";
 import { StratManager__factory, Vault__factory } from "../typechain";
 
-const Vault_Addr = "0x5a2b19836324e3495a3977aE7b9B1ff0D968d96b";
+const Vault_Addr = "0x94e7DC6dAc3eaA4191638B2312A24bd78a0784B9";
 
 async function main() {
   const [account] = await ethers.getSigners();

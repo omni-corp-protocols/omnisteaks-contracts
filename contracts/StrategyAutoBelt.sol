@@ -11,20 +11,36 @@ import "./FeeManager.sol";
 import "./StratManager.sol";
 import "./GasThrottler.sol";
 
-
 interface IAutoFarmV2 {
-    function poolInfo(uint256 _pid) external view returns (address, uint256, uint256, uint256, address);
+    function poolInfo(uint256 _pid)
+        external
+        view
+        returns (
+            address,
+            uint256,
+            uint256,
+            uint256,
+            address
+        );
+
     function userInfo(uint256 _pid, address _user) external view returns (uint256, uint256);
+
     function pendingAUTO(uint256 _pid, address _user) external view returns (uint256);
+
     function stakedWantTokens(uint256 _pid, address _user) external view returns (uint256);
+
     function deposit(uint256 _pid, uint256 _wantAmt) external;
+
     function withdraw(uint256 _pid, uint256 _wantAmt) external;
+
     function withdrawAll(uint256 _pid) external;
+
     function emergencyWithdraw(uint256 _pid) external;
 }
 
 interface IBeltToken {
     function token() external view returns (address);
+
     function deposit(uint256 amount, uint256 min_mint_amount) external;
 }
 
@@ -33,13 +49,13 @@ contract StrategyAutoBelt is StratManager, FeeManager, GasThrottler {
     using SafeMath for uint256;
 
     // Tokens used
-    address constant public wbnb = address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c);
-    address constant public Auto = address(0xa184088a740c695E156F91f5cC086a06bb78b827);
+    address public constant wbnb = address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c);
+    address public constant Auto = address(0xa184088a740c695E156F91f5cC086a06bb78b827);
     address public want;
     address public wantToken;
 
     // Third party contracts
-    address constant public autofarm = address(0x0895196562C7868C5Be92459FaE7f877ED450452);
+    address public constant autofarm = address(0x0895196562C7868C5Be92459FaE7f877ED450452);
     uint256 public poolId;
 
     bool public harvestOnDeposit;
@@ -48,7 +64,6 @@ contract StrategyAutoBelt is StratManager, FeeManager, GasThrottler {
     // Routes
     address[] public AutoToWbnbRoute = [Auto, wbnb];
     address[] public AutoToWantTokenRoute;
-
 
     /**
      * @dev If rewards are locked in AutoFarm, retire() will use emergencyWithdraw.
@@ -92,6 +107,13 @@ contract StrategyAutoBelt is StratManager, FeeManager, GasThrottler {
         }
     }
 
+    function beforeDeposit() external override {
+        if (harvestOnDeposit) {
+            require(msg.sender == vault, "!vault");
+            _harvest();
+        }
+    }
+
     function withdraw(uint256 _amount) external {
         require(msg.sender == vault, "!vault");
 
@@ -116,6 +138,10 @@ contract StrategyAutoBelt is StratManager, FeeManager, GasThrottler {
 
     // compounds earnings and charges performance fee
     function harvest() external whenNotPaused onlyEOA gasThrottle {
+        _harvest();
+    }
+
+    function _harvest() internal {
         IAutoFarmV2(autofarm).deposit(poolId, 0);
         chargeFees();
         addLiquidity();
@@ -170,12 +196,6 @@ contract StrategyAutoBelt is StratManager, FeeManager, GasThrottler {
     //added for set withdraw fee
     function setHarvestOnDeposit(bool _harvestOnDeposit) external onlyManager {
         harvestOnDeposit = _harvestOnDeposit;
-
-        if (harvestOnDeposit == true) {
-            super.setWithdrawalFee(0);
-        } else {
-            super.setWithdrawalFee(10);
-        }
     }
 
     // called as part of strat migration. Sends all the available funds back to the vault.
@@ -193,7 +213,7 @@ contract StrategyAutoBelt is StratManager, FeeManager, GasThrottler {
     }
 
     function _retireStrat() internal {
-        IAutoFarmV2(autofarm).withdraw(poolId, uint(-1));
+        IAutoFarmV2(autofarm).withdraw(poolId, uint256(-1));
 
         uint256 wantBal = IERC20(want).balanceOf(address(this));
         IERC20(want).transfer(vault, wantBal);
@@ -209,7 +229,7 @@ contract StrategyAutoBelt is StratManager, FeeManager, GasThrottler {
     // pauses deposits and withdraws all funds from third party systems.
     function panic() public onlyManager {
         pause();
-        IAutoFarmV2(autofarm).withdraw(poolId, uint(-1));
+        IAutoFarmV2(autofarm).withdraw(poolId, uint256(-1));
     }
 
     // pauses deposits and withdraws all funds from third party systems.
@@ -233,9 +253,9 @@ contract StrategyAutoBelt is StratManager, FeeManager, GasThrottler {
     }
 
     function _giveAllowances() internal {
-        IERC20(want).safeApprove(autofarm, uint(-1));
-        IERC20(Auto).safeApprove(unirouter, uint(-1));
-        IERC20(wantToken).safeApprove(want, uint(-1));
+        IERC20(want).safeApprove(autofarm, uint256(-1));
+        IERC20(Auto).safeApprove(unirouter, uint256(-1));
+        IERC20(wantToken).safeApprove(want, uint256(-1));
     }
 
     function _removeAllowances() internal {
