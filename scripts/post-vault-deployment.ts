@@ -16,8 +16,8 @@ async function main() {
   // console.log(`Tx: ${tx.hash}`);
   // await tx.wait();
 
-  console.log("Calling setTotalHarvestFee - 5%");
-  let tx = await strategyExtraI.setTotalHarvestFee(500);
+  console.log("Calling setTotalHarvestFee - 3.5%");
+  let tx = await strategyExtraI.setTotalHarvestFee(350);
   console.log(`Tx: ${tx.hash}`);
   await tx.wait();
 
