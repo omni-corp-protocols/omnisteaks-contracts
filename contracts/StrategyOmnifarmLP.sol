@@ -185,12 +185,6 @@ contract StrategyOmnifarmLP is StratManager, FeeManager, GasThrottler {
 
     function setHarvestOnDeposit(bool _harvestOnDeposit) external onlyManager {
         harvestOnDeposit = _harvestOnDeposit;
-
-        if (harvestOnDeposit == true) {
-            super.setWithdrawalFee(0);
-        } else {
-            super.setWithdrawalFee(10);
-        }
     }
 
     // called as part of strat migration. Sends all the available funds back to the vault.
