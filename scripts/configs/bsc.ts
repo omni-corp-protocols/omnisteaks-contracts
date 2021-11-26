@@ -1,16 +1,46 @@
 export const config = {
   approvalDelay: "14400", // in seconds
   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
-  name: "Puff Biswap-BUSD-BNB",
-  symbol: "puffBiswap-BUSD-BNB",
-  wantToken: "0xaCAac9311b0096E04Dfe96b6D87dec867d3883Dc",
-  poolId: 3,
-  unirouter: "0x3a6d8cA21D1CF76F653A67577FA0D27453350dD8",
-  pool: "0xDbc1A13490deeF9c3C12b44FE77b503c1B061739",
-  outputToNativeRoute: ["0x965F527D9159dCe6288a2219DB51fc6Eef120dD1", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
-  outputToLp0Route: ["0x965F527D9159dCe6288a2219DB51fc6Eef120dD1", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
-  outputToLp1Route: ["0x965F527D9159dCe6288a2219DB51fc6Eef120dD1","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c","0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"],
+  name: "Puff Omnifarm LAND-BNB",
+  symbol: "puffOmnifarm-LAND-BNB",
+  wantToken: "0x468CDe4aD48cbAfA3cDfb68Fd9f2c114DDfE6c08",
+  poolId: 0,
+  unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+  pool: "0xDa4ec02C0e8089c9E1A341BB09bafc77F51622C8",
+  outputToNativeRoute: ["0x9D986A3f147212327Dd658F712d5264a73a1fdB0", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+  outputToLp0Route: ["0x9D986A3f147212327Dd658F712d5264a73a1fdB0"],
+  outputToLp1Route: ["0x9D986A3f147212327Dd658F712d5264a73a1fdB0","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
 };
+
+// usdo-LAND
+// export const config = {
+//   approvalDelay: "14400", // in seconds
+//   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
+//   name: "Puff Omnifarm USDO-LAND",
+//   symbol: "puffOmnifarm-USDO-LAND",
+//   wantToken: "0x2bfB03B810d606c3FCF9f1C13b7D1bd35f5e908B",
+//   poolId: 0,
+//   unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+//   pool: "0xF5E2d49f35C106aF2155E7A99AE69457A5E6df09",
+//   outputToNativeRoute: ["0x9D986A3f147212327Dd658F712d5264a73a1fdB0", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+//   outputToLp0Route: ["0x9D986A3f147212327Dd658F712d5264a73a1fdB0","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0x5801D0e1C7D977D78E4890880B8E579eb4943276"],
+//   outputToLp1Route: ["0x9D986A3f147212327Dd658F712d5264a73a1fdB0"],
+// };
+
+//BSW-BUSD-BNB
+// export const config = {
+//   approvalDelay: "14400", // in seconds
+//   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
+//   name: "Puff Biswap-BUSD-BNB",
+//   symbol: "puffBiswap-BUSD-BNB",
+//   wantToken: "0xaCAac9311b0096E04Dfe96b6D87dec867d3883Dc",
+//   poolId: 3,
+//   unirouter: "0x3a6d8cA21D1CF76F653A67577FA0D27453350dD8",
+//   pool: "0xDbc1A13490deeF9c3C12b44FE77b503c1B061739",
+//   outputToNativeRoute: ["0x965F527D9159dCe6288a2219DB51fc6Eef120dD1", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+//   outputToLp0Route: ["0x965F527D9159dCe6288a2219DB51fc6Eef120dD1", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+//   outputToLp1Route: ["0x965F527D9159dCe6288a2219DB51fc6Eef120dD1","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c","0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"],
+// };
 //BNB-LMT
 // export const config = {
 //   approvalDelay: "14400", // in seconds
