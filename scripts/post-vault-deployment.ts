@@ -2,7 +2,7 @@ import { ethers } from "hardhat";
 import { config } from "./configs/bsc";
 import { StratManager__factory, Vault__factory } from "../typechain";
 
-const Vault_Addr = "0x1190A3c409145ee329B972E216AF0CEF87b44536";
+const Vault_Addr = "0xE69e48b59c776Ae33771b190a5C9eE184Cae3DA3";
 
 async function main() {
   const [account] = await ethers.getSigners();
@@ -11,6 +11,7 @@ async function main() {
   const stratAddr = await vault.strategy();
 
   const strategyExtraI = new ethers.Contract(stratAddr, StratExtraAbi, account);
+  //Set true for single token autocompounding 
   // console.log("Calling setHarvestOnDeposit");
   // let tx = await strategyExtraI.setHarvestOnDeposit(true, { gasLimit: 200000 });
   // console.log(`Tx: ${tx.hash}`);

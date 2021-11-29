@@ -1,16 +1,30 @@
 export const config = {
   approvalDelay: "14400", // in seconds
   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
-  name: "Puff Omnifarm LAND-BNB",
-  symbol: "puffOmnifarm-LAND-BNB",
-  wantToken: "0x468CDe4aD48cbAfA3cDfb68Fd9f2c114DDfE6c08",
+  name: "Puff Omnifarm USDO-GFX",
+  symbol: "puffOmnifarm-USDO-GFX",
+  wantToken: "0x9b0fe98DDDC7d9FD8db1843E40658E11E0Efd4b1",
   poolId: 0,
   unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
-  pool: "0xDa4ec02C0e8089c9E1A341BB09bafc77F51622C8",
-  outputToNativeRoute: ["0x9D986A3f147212327Dd658F712d5264a73a1fdB0", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
-  outputToLp0Route: ["0x9D986A3f147212327Dd658F712d5264a73a1fdB0"],
-  outputToLp1Route: ["0x9D986A3f147212327Dd658F712d5264a73a1fdB0","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+  pool: "0x50d580a15f9fc01f4512C4fCfd4AA21aA7F9e318",
+  outputToNativeRoute: ["0x65ad6a2288b2dd23e466226397c8f5d1794e58fc", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+  outputToLp0Route: ["0x65ad6a2288b2dd23e466226397c8f5d1794e58fc","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0x5801D0e1C7D977D78E4890880B8E579eb4943276"],
+  outputToLp1Route: ["0x65ad6a2288b2dd23e466226397c8f5d1794e58fc"],
 };
+
+// export const config = {
+//   approvalDelay: "14400", // in seconds
+//   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
+//   name: "Puff Omnifarm LAND-BNB",
+//   symbol: "puffOmnifarm-LAND-BNB",
+//   wantToken: "0x468CDe4aD48cbAfA3cDfb68Fd9f2c114DDfE6c08",
+//   poolId: 0,
+//   unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+//   pool: "0xDa4ec02C0e8089c9E1A341BB09bafc77F51622C8",
+//   outputToNativeRoute: ["0x9D986A3f147212327Dd658F712d5264a73a1fdB0", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+//   outputToLp0Route: ["0x9D986A3f147212327Dd658F712d5264a73a1fdB0"],
+//   outputToLp1Route: ["0x9D986A3f147212327Dd658F712d5264a73a1fdB0","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+// };
 
 // usdo-LAND
 // export const config = {
