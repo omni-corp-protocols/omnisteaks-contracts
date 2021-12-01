@@ -1,15 +1,15 @@
 export const config = {
   approvalDelay: "14400", // in seconds
   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
-  name: "Puff Omnifarm USDO-GFX",
-  symbol: "puffOmnifarm-USDO-GFX",
-  wantToken: "0x9b0fe98DDDC7d9FD8db1843E40658E11E0Efd4b1",
-  poolId: 0,
-  unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
-  pool: "0x50d580a15f9fc01f4512C4fCfd4AA21aA7F9e318",
-  outputToNativeRoute: ["0x65ad6a2288b2dd23e466226397c8f5d1794e58fc", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
-  outputToLp0Route: ["0x65ad6a2288b2dd23e466226397c8f5d1794e58fc","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0x5801D0e1C7D977D78E4890880B8E579eb4943276"],
-  outputToLp1Route: ["0x65ad6a2288b2dd23e466226397c8f5d1794e58fc"],
+  name: "Puff Ape BABI-BNB",
+  symbol: "puffApeBABI-BNB",
+  wantToken: "0x07999087e34Fa79E7145C051Ac4b1aE9407beFf4",
+  poolId: 109,
+  unirouter: "0xC0788A3aD43d79aa53B09c2EaCc313A787d1d607", //da6 factory
+  pool: "0x5c8D727b265DBAfaba67E050f2f739cAeEB4A6F9",
+  outputToNativeRoute: [ "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+  outputToLp0Route: [ "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+  outputToLp1Route: ["0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0xec15a508a187e8DDfe572A5423Faa82Bbdd65120"],
 };
 
 // export const config = {
