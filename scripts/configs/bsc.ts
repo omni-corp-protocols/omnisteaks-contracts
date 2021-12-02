@@ -1,16 +1,32 @@
+// usdo-ROSN
 export const config = {
   approvalDelay: "14400", // in seconds
   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
-  name: "Puff Ape BABI-BNB",
-  symbol: "puffApeBABI-BNB",
-  wantToken: "0x07999087e34Fa79E7145C051Ac4b1aE9407beFf4",
-  poolId: 109,
-  unirouter: "0xC0788A3aD43d79aa53B09c2EaCc313A787d1d607", //da6 factory
-  pool: "0x5c8D727b265DBAfaba67E050f2f739cAeEB4A6F9",
-  outputToNativeRoute: [ "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
-  outputToLp0Route: [ "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
-  outputToLp1Route: ["0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0xec15a508a187e8DDfe572A5423Faa82Bbdd65120"],
+  name: "Puff Omnifarm USDO-ROSN",
+  symbol: "puffOmnifarm-USDO-ROSN",
+  wantToken: "0x1544E3D6F5B485889499D020Ad6E3eadBA9df525",
+  poolId: 0,
+  unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+  pool: "0x142Ec87C867F85df9cb8e1d4b1B1B6d067DE016c",
+  outputToNativeRoute: ["0x651Cd665bD558175A956fb3D72206eA08Eb3dF5b", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+  outputToLp0Route: ["0x651Cd665bD558175A956fb3D72206eA08Eb3dF5b","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0x5801D0e1C7D977D78E4890880B8E579eb4943276"],
+  outputToLp1Route: ["0x651Cd665bD558175A956fb3D72206eA08Eb3dF5b"],
 };
+
+// ape-BNB
+// export const config = {
+//   approvalDelay: "14400", // in seconds
+//   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
+//   name: "Puff Ape BABI-BNB",
+//   symbol: "puffApeBABI-BNB",
+//   wantToken: "0x07999087e34Fa79E7145C051Ac4b1aE9407beFf4",
+//   poolId: 109,
+//   unirouter: "0xC0788A3aD43d79aa53B09c2EaCc313A787d1d607", //da6 factory
+//   pool: "0x5c8D727b265DBAfaba67E050f2f739cAeEB4A6F9",
+//   outputToNativeRoute: [ "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+//   outputToLp0Route: [ "0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+//   outputToLp1Route: ["0x603c7f932ed1fc6575303d8fb018fdcbb0f39a95", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0xec15a508a187e8DDfe572A5423Faa82Bbdd65120"],
+// };
 
 // export const config = {
 //   approvalDelay: "14400", // in seconds
