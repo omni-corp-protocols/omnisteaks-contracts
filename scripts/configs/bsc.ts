@@ -1,17 +1,32 @@
-// usdo-ROSN
+// usdo-HYVE
 export const config = {
   approvalDelay: "14400", // in seconds
   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
-  name: "Puff Omnifarm USDO-ROSN",
-  symbol: "puffOmnifarm-USDO-ROSN",
-  wantToken: "0x1544E3D6F5B485889499D020Ad6E3eadBA9df525",
+  name: "Puff Omnifarm USDO-HYVE",
+  symbol: "puffOmnifarm-USDO-HYVE",
+  wantToken: "0x5AbaE978D50685B4BEeA814A8f2c76eE077D78Af",
   poolId: 0,
   unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
-  pool: "0x142Ec87C867F85df9cb8e1d4b1B1B6d067DE016c",
-  outputToNativeRoute: ["0x651Cd665bD558175A956fb3D72206eA08Eb3dF5b", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
-  outputToLp0Route: ["0x651Cd665bD558175A956fb3D72206eA08Eb3dF5b","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0x5801D0e1C7D977D78E4890880B8E579eb4943276"],
-  outputToLp1Route: ["0x651Cd665bD558175A956fb3D72206eA08Eb3dF5b"],
+  pool: "0x2e2E41ef5809e0A5E98009F0B7f246707CE9df34",
+  outputToNativeRoute: ["0xF6565A97Dc832d93DC83B75EE9aa5c7e8ecB0F9d", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+  outputToLp0Route: ["0xF6565A97Dc832d93DC83B75EE9aa5c7e8ecB0F9d","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0x5801D0e1C7D977D78E4890880B8E579eb4943276"],
+  outputToLp1Route: ["0xF6565A97Dc832d93DC83B75EE9aa5c7e8ecB0F9d"],
 };
+
+// usdo-ROSN
+// export const config = {
+//   approvalDelay: "14400", // in seconds
+//   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
+//   name: "Puff Omnifarm USDO-ROSN",
+//   symbol: "puffOmnifarm-USDO-ROSN",
+//   wantToken: "0x1544E3D6F5B485889499D020Ad6E3eadBA9df525",
+//   poolId: 0,
+//   unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+//   pool: "0x142Ec87C867F85df9cb8e1d4b1B1B6d067DE016c",
+//   outputToNativeRoute: ["0x651Cd665bD558175A956fb3D72206eA08Eb3dF5b", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+//   outputToLp0Route: ["0x651Cd665bD558175A956fb3D72206eA08Eb3dF5b","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0x5801D0e1C7D977D78E4890880B8E579eb4943276"],
+//   outputToLp1Route: ["0x651Cd665bD558175A956fb3D72206eA08Eb3dF5b"],
+// };
 
 // ape-BNB
 // export const config = {
