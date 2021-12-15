@@ -2,16 +2,46 @@
 export const config = {
   approvalDelay: "14400", // in seconds
   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
-  name: "Puff Omnifarm USDO-HYVE",
-  symbol: "puffOmnifarm-USDO-HYVE",
-  wantToken: "0x5AbaE978D50685B4BEeA814A8f2c76eE077D78Af",
-  poolId: 0,
+  name: "Puff CakeV2 BUSD-BNB",
+  symbol: "puffCakeV2BUSD-BNB",
+  wantToken: "0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16",
+  poolId: 252,
   unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
-  pool: "0x2e2E41ef5809e0A5E98009F0B7f246707CE9df34",
-  outputToNativeRoute: ["0xF6565A97Dc832d93DC83B75EE9aa5c7e8ecB0F9d", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
-  outputToLp0Route: ["0xF6565A97Dc832d93DC83B75EE9aa5c7e8ecB0F9d","0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0x5801D0e1C7D977D78E4890880B8E579eb4943276"],
-  outputToLp1Route: ["0xF6565A97Dc832d93DC83B75EE9aa5c7e8ecB0F9d"],
+  pool: "0x73feaa1eE314F8c655E354234017bE2193C9E24E",
+  outputToNativeRoute: ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+  outputToLp0Route: ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+  outputToLp1Route: ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"],
 };
+
+// export const config = {
+//   approvalDelay: "14400", // in seconds
+//   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
+//   name: "Puff CakeV2 USDT-BNB",
+//   symbol: "puffCakeV2USDT-BNB",
+//   wantToken: "0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE",
+//   poolId: 264,
+//   unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E", //0x55d398326f99059fF775485246999027B3197955
+//   pool: "0x73feaa1eE314F8c655E354234017bE2193C9E24E",
+//   outputToNativeRoute: ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+//   outputToLp0Route: ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c","0x55d398326f99059fF775485246999027B3197955"],
+//   outputToLp1Route: ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+// };
+
+// usdo-HYVE
+// export const config = {
+//   approvalDelay: "14400", // in seconds
+//   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
+//   name: "Puff Omnifarm USDO-GFX",
+//   symbol: "puffOmnifarm-USDO-GFX",
+//   wantToken: "0x9b0fe98DDDC7d9FD8db1843E40658E11E0Efd4b1",
+//   poolId: 0,
+//   unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+//   pool: "0x50d580a15f9fc01f4512C4fCfd4AA21aA7F9e318",
+//   vault: "0xE69e48b59c776Ae33771b190a5C9eE184Cae3DA3",
+//   outputToNativeRoute: ["0x65ad6A2288b2Dd23E466226397c8F5D1794e58fC", "0x5801D0e1C7D977D78E4890880B8E579eb4943276"],
+//   outputToLp0Route: ["0x65ad6A2288b2Dd23E466226397c8F5D1794e58fC", "0x5801D0e1C7D977D78E4890880B8E579eb4943276"],
+//   outputToLp1Route: ["0x65ad6A2288b2Dd23E466226397c8F5D1794e58fC"],
+// };
 
 // usdo-ROSN
 // export const config = {
