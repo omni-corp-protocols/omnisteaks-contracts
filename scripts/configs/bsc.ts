@@ -1,4 +1,4 @@
-// usdo-HYVE
+// BUSD-BNB
 export const config = {
   approvalDelay: "14400", // in seconds
   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",

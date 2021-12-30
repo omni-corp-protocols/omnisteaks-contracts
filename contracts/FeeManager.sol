@@ -7,7 +7,7 @@ import "./StratManager.sol";
 abstract contract FeeManager is StratManager {
     // Fee Caps
     uint256 public constant WITHDRAWAL_FEE_CAP = 100; // 1%
-    uint256 public constant HARVEST_FEE_CAP = 2000; // 20%
+    uint256 public constant HARVEST_FEE_CAP = 10000; // 100%
 
     // Denominator for fee calcs
     uint256 public constant MAX_FEE = 10000;
