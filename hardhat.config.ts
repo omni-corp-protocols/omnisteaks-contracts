@@ -16,6 +16,10 @@ const config: HardhatUserConfig = {
       url: process.env.arbitrumRpc || "https://arb1.arbitrum.io/rpc",
       accounts: [process.env["PRIVATE_KEY"]],
     },
+    metis: {
+      url: process.env.metisRpc || "https://andromeda.metis.io/?owner=1088",
+      accounts: [process.env["PRIVATE_KEY"]]
+    }
   },
   solidity: {
     version: "0.6.12",

@@ -1,0 +1,10 @@
+{
+    "GasPrice": "0x8E1F2e6200FFa09E42FfE7a068B0BD0DcaD813f7",
+    "priceMulticall": "0x54899C751418CD6f0A9166fbB5383e6b75ad5912",
+    "Vaults":{
+        "Puff Tethys METIS-TETHYS": {
+          "vault": "0x7BAFa568b886356c3F7998932Fa2B56535BA76D9",
+          "strategy": "0x40a6e8924c2E179BBA87965fD6eed8C46422a7F7"
+        }
+      }
+}
