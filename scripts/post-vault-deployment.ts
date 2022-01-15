@@ -2,7 +2,7 @@ import { ethers } from "hardhat";
 import { config } from "./configs/bsc";
 import { StratManager__factory, Vault__factory } from "../typechain";
 
-const Vault_Addr = "0x885bFff9304388950A44273a20180688D1C9A9A4";
+const Vault_Addr = "0x622e8a33B9EE15676c28271D004FB957035DEf12";
 
 async function main() {
   const [account] = await ethers.getSigners();
@@ -17,8 +17,8 @@ async function main() {
   // console.log(`Tx: ${tx.hash}`);
   // await tx.wait();
 
-  console.log("Calling setTotalHarvestFee - 20% For Strategy :>>>>", stratAddr);
-  let tx = await strategyExtraI.setTotalHarvestFee(2000);
+  console.log("Calling setTotalHarvestFee - 1% For Strategy :>>>>", stratAddr);
+  let tx = await strategyExtraI.setTotalHarvestFee(100);
   console.log(`Tx: ${tx.hash}`);
   await tx.wait();
 
@@ -30,7 +30,7 @@ async function main() {
   await tx.wait();
 
   console.log("Calling setPlatformFeeRecipient");
-  tx = await stratManager.setPlatformFeeRecipient(config.admin);
+  tx = await stratManager.setPlatformFeeRecipient(config.feeWallet);
   console.log(`Tx: ${tx.hash}`);
   await tx.wait();
 

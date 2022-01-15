@@ -2,15 +2,15 @@ import hre from "hardhat";
 import { ethers } from "hardhat";
 import { readFileSync, writeFileSync } from "fs";
 
-import { Vault, StrategyMasterChefTethys } from "../typechain";
-import { config } from "./configs/bsc";
+import { Vault, StrategyMasterChefNet } from "../typechain";
+import { config } from "./configs/metis";
 const outputFilePath = `./deployments/${hre.network.name}.json`;
 
 async function main() {
   const deployments = JSON.parse(readFileSync(outputFilePath, "utf-8"));
 
   const [deployer] = await ethers.getSigners();
-  console.log(`>>>>>>>>>>>> Deployer: ${deployer.address} <<<<<<<<<<<<\n`);
+  console.log(`>>>>>>>>>>>> Deployer: ${deployer.address} and Name: ${config.name} <<<<<<<<<<<<\n`);
 
   const deployerTxCount = await deployer.getTransactionCount("latest");
   const stratAddr = ethers.utils.getContractAddress({ from: deployer.address, nonce: deployerTxCount + 1 });
@@ -25,8 +25,8 @@ async function main() {
   await vault.deployed();
 
   // Strategy
-  const StrategyMasterChefTethys = await hre.ethers.getContractFactory("StrategyMasterChefTethys");
-  const strategy: StrategyMasterChefTethys = await StrategyMasterChefTethys.deploy(
+  const StrategyMasterChefNet = await hre.ethers.getContractFactory("StrategyMasterChefNet");
+  const strategy: StrategyMasterChefNet = await StrategyMasterChefNet.deploy(
     config.poolId,
     config.wantToken,
     config.pool,
@@ -58,7 +58,7 @@ async function main() {
     config.symbol,
     config.approvalDelay,
   ]);
-  deployments["Constructors"][strategy.address] = StrategyMasterChefTethys.interface.encodeDeploy([
+  deployments["Constructors"][strategy.address] = StrategyMasterChefNet.interface.encodeDeploy([
     config.poolId,
     config.wantToken,
     config.pool,

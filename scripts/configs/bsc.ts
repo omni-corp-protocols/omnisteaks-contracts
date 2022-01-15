@@ -3,30 +3,17 @@
 export const config = {
   approvalDelay: "14400", // in seconds
   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
-  name: "Puff Tethys METIS-TETHYS",
-  symbol: "puffTethysMETIS-TETHYS",
-  wantToken: "0xc9b290FF37fA53272e9D71A0B13a444010aF4497", //"0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16",
+  feeWallet: "0xa59194C3c3b3DFB553186E1cdfb5a86A128f31a6",
+  name: "Puff CakeV2",
+  symbol: "puffCakeV2",
+  wantToken: "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
   poolId: 0,
-  unirouter: "0x81b9FA50D5f5155Ee17817C21702C3AE4780AD09",//"0x10ED43C718714eb63d5aA57B78B54704E256024E",
-  pool: "0x54A8fB8c634dED694D270b78Cb931cA6bF241E21",//"0x73feaa1eE314F8c655E354234017bE2193C9E24E",
-  outputToNativeRoute: ["0x69fdb77064ec5c84FA2F21072973eB28441F43F3", "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000"],
-  outputToLp0Route: ["0x69fdb77064ec5c84FA2F21072973eB28441F43F3"],
-  outputToLp1Route: ["0x69fdb77064ec5c84FA2F21072973eB28441F43F3", "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000"],
+  unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+  pool: "0x73feaa1eE314F8c655E354234017bE2193C9E24E",
+  outputToNativeRoute: ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+  outputToLp0Route: ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
+  outputToLp1Route: ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"],
 };
-
-// export const config = {
-//   approvalDelay: "14400", // in seconds
-//   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
-//   name: "Puff CakeV2 BUSD-BNB",
-//   symbol: "puffCakeV2BUSD-BNB",
-//   wantToken: "0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16",
-//   poolId: 252,
-//   unirouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
-//   pool: "0x73feaa1eE314F8c655E354234017bE2193C9E24E",
-//   outputToNativeRoute: ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
-//   outputToLp0Route: ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"],
-//   outputToLp1Route: ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"],
-// };
 
 // export const config = {
 //   approvalDelay: "14400", // in seconds
