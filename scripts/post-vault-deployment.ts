@@ -1,8 +1,8 @@
 import { ethers } from "hardhat";
-import { config } from "./configs/bsc";
+import { config } from "./configs/metis";
 import { StratManager__factory, Vault__factory } from "../typechain";
 
-const Vault_Addr = "0x622e8a33B9EE15676c28271D004FB957035DEf12";
+const Vault_Addr = "0xE0F94fEE7a5318E10Fd0FCf23A4735208f1a7E41";
 
 async function main() {
   const [account] = await ethers.getSigners();
@@ -17,8 +17,13 @@ async function main() {
   // console.log(`Tx: ${tx.hash}`);
   // await tx.wait();
 
-  console.log("Calling setTotalHarvestFee - 1% For Strategy :>>>>", stratAddr);
-  let tx = await strategyExtraI.setTotalHarvestFee(100);
+  console.log("Calling setTotalHarvestFee - 10% For Strategy :>>>>", stratAddr);
+  let tx = await strategyExtraI.setTotalHarvestFee(1000);
+  console.log(`Tx: ${tx.hash}`);
+  await tx.wait();
+
+  console.log("Calling setCallFee - 0% For Strategy :>>>>", stratAddr);
+  tx = await strategyExtraI.setCallFee(0);
   console.log(`Tx: ${tx.hash}`);
   await tx.wait();
 
@@ -67,6 +72,19 @@ const StratExtraAbi = [
       },
     ],
     name: "setHarvestOnDeposit",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_fee",
+        type: "uint256",
+      },
+    ],
+    name: "setCallFee",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
