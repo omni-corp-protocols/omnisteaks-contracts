@@ -1,32 +1,32 @@
-  export const config = {
-    approvalDelay: "14400", // in seconds
-    admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
-    feeWallet: "0xEf3e501820C2EaE925c83C13824245a2b88f4b0d",
-    name: "Puff Netswap METIS-m.USDT",
-    symbol: "puffNetswapMETIS-m.USDT",
-    wantToken: "0x3d60afecf67e6ba950b499137a72478b2ca7c5a1", //"0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16",
-    poolId: 6,
-    unirouter: "0x1E876cCe41B7b844FDe09E38Fa1cf00f213bFf56",//"0x10ED43C718714eb63d5aA57B78B54704E256024E",
-    pool: "0x9d1dbB49b2744A1555EDbF1708D64dC71B0CB052",//"0x73feaa1eE314F8c655E354234017bE2193C9E24E",
-    outputToNativeRoute: ["0x90fE084F877C65e1b577c7b2eA64B8D8dd1AB278","0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000"],
-    outputToLp0Route: ["0x90fE084F877C65e1b577c7b2eA64B8D8dd1AB278","0xbB06DCA3AE6887fAbF931640f67cab3e3a16F4dC"],
-    outputToLp1Route: ["0x90fE084F877C65e1b577c7b2eA64B8D8dd1AB278","0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000"],
-  };  
-
   // export const config = {
   //   approvalDelay: "14400", // in seconds
   //   admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
   //   feeWallet: "0xEf3e501820C2EaE925c83C13824245a2b88f4b0d",
-  //   name: "Puff Netswap WETH-METIS",
-  //   symbol: "puffNetswapWETH-METIS",
-  //   wantToken: "0x59051b5f5172b69e66869048dc69d35db0b3610d", //"0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16",
-  //   poolId: 5,
+  //   name: "Puff Netswap METIS-m.USDT",
+  //   symbol: "puffNetswapMETIS-m.USDT",
+  //   wantToken: "0x3d60afecf67e6ba950b499137a72478b2ca7c5a1", //"0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16",
+  //   poolId: 6,
   //   unirouter: "0x1E876cCe41B7b844FDe09E38Fa1cf00f213bFf56",//"0x10ED43C718714eb63d5aA57B78B54704E256024E",
   //   pool: "0x9d1dbB49b2744A1555EDbF1708D64dC71B0CB052",//"0x73feaa1eE314F8c655E354234017bE2193C9E24E",
   //   outputToNativeRoute: ["0x90fE084F877C65e1b577c7b2eA64B8D8dd1AB278","0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000"],
-  //   outputToLp0Route: ["0x90fE084F877C65e1b577c7b2eA64B8D8dd1AB278","0x420000000000000000000000000000000000000A"],
+  //   outputToLp0Route: ["0x90fE084F877C65e1b577c7b2eA64B8D8dd1AB278","0xbB06DCA3AE6887fAbF931640f67cab3e3a16F4dC"],
   //   outputToLp1Route: ["0x90fE084F877C65e1b577c7b2eA64B8D8dd1AB278","0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000"],
-  // };
+  // };  
+
+  export const config = {
+    approvalDelay: "14400", // in seconds
+    admin: "0x87bF9c6459C05c136BF74d010691Cd79d36dbE0F",
+    feeWallet: "0xEf3e501820C2EaE925c83C13824245a2b88f4b0d",
+    name: "Puff Netswap WETH-METIS",
+    symbol: "puffNetswapWETH-METIS",
+    wantToken: "0x59051b5f5172b69e66869048dc69d35db0b3610d", //"0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16",
+    poolId: 5,
+    unirouter: "0x1E876cCe41B7b844FDe09E38Fa1cf00f213bFf56",//"0x10ED43C718714eb63d5aA57B78B54704E256024E",
+    pool: "0x9d1dbB49b2744A1555EDbF1708D64dC71B0CB052",//"0x73feaa1eE314F8c655E354234017bE2193C9E24E",
+    outputToNativeRoute: ["0x90fE084F877C65e1b577c7b2eA64B8D8dd1AB278","0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000"],
+    outputToLp0Route: ["0x90fE084F877C65e1b577c7b2eA64B8D8dd1AB278","0x420000000000000000000000000000000000000A"],
+    outputToLp1Route: ["0x90fE084F877C65e1b577c7b2eA64B8D8dd1AB278","0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000"],
+  };
 
   // export const config = {
   //   approvalDelay: "14400", // in seconds

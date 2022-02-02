@@ -2,7 +2,7 @@ import { ethers } from "hardhat";
 import { config } from "./configs/metis";
 import { StratManager__factory, Vault__factory } from "../typechain";
 
-const Vault_Addr = "0xE0F94fEE7a5318E10Fd0FCf23A4735208f1a7E41";
+const Vault_Addr = "0x34F88c1137E6986c7eb864054688311960C2b12b";
 
 async function main() {
   const [account] = await ethers.getSigners();
